@@ -125,7 +125,14 @@ void ksw_exts2_sse(void *km, int qlen, const uint8_t *query, int tlen, const uin
 			for (t = 0; t < tlen - 4; ++t) {
 				int can_type = 0; // type of canonical site: 0=none, 1=GT/AG only, 2=GTr/yAG
 				if ((flag & KSW_EZ_SPLICE_FOR) && target[t+1] == 2 && target[t+2] == 3) can_type = 1; // GTr...
+				
+				
+				//. modified to include GC/GA donnor site as "canonical sites"            by YIBI CHEN
+				if ((flag & KSW_EZ_SPLICE_FOR) && target[t+1] == 2 && target[t+2] == 1) can_type = 1; // GCr...
+				if ((flag & KSW_EZ_SPLICE_FOR) && target[t+1] == 2 && target[t+2] == 1) can_type = 1; // GAr...
+				
 				if ((flag & KSW_EZ_SPLICE_REV) && target[t+1] == 1 && target[t+2] == 3) can_type = 1; // CTr...
+				
 				if (can_type && (target[t+3] == 0 || target[t+3] == 2)) can_type = 2;
 				if (can_type) ((int8_t*)donor)[t] = can_type == 2? 0 : semi_cost;
 			}
@@ -137,6 +144,11 @@ void ksw_exts2_sse(void *km, int qlen, const uint8_t *query, int tlen, const uin
 				int can_type = 0;
 				if ((flag & KSW_EZ_SPLICE_FOR) && target[t-1] == 0 && target[t] == 2) can_type = 1; // ...yAG
 				if ((flag & KSW_EZ_SPLICE_REV) && target[t-1] == 0 && target[t] == 1) can_type = 1; // ...yAC
+				
+				//. modified to include GC/GA donnor site as "canonical sites"            by YIBI CHEN
+				if ((flag & KSW_EZ_SPLICE_REV) && target[t-1] == 2 && target[t] == 1) can_type = 1; // ...yGC
+				if ((flag & KSW_EZ_SPLICE_REV) && target[t-1] == 3 && target[t] == 1) can_type = 1; // ...yTC
+				
 				if (can_type && (target[t-2] == 1 || target[t-2] == 3)) can_type = 2;
 				if (can_type) ((int8_t*)acceptor)[t] = can_type == 2? 0 : semi_cost;
 			}
@@ -149,6 +161,11 @@ void ksw_exts2_sse(void *km, int qlen, const uint8_t *query, int tlen, const uin
 				int can_type = 0; // type of canonical site: 0=none, 1=GT/AG only, 2=GTr/yAG
 				if ((flag & KSW_EZ_SPLICE_FOR) && target[t+1] == 2 && target[t+2] == 0) can_type = 1; // GAy...
 				if ((flag & KSW_EZ_SPLICE_REV) && target[t+1] == 1 && target[t+2] == 0) can_type = 1; // CAy...
+				
+				//. modified to include GC/GA donnor site as "canonical sites"            by YIBI CHEN
+				if ((flag & KSW_EZ_SPLICE_REV) && target[t+1] == 1 && target[t+2] == 2) can_type = 1; // CGy...
+				if ((flag & KSW_EZ_SPLICE_REV) && target[t+1] == 1 && target[t+2] == 3) can_type = 1; // CTy...
+				
 				if (can_type && (target[t+3] == 1 || target[t+3] == 3)) can_type = 2;
 				if (can_type) ((int8_t*)donor)[t] = can_type == 2? 0 : semi_cost;
 			}
@@ -159,6 +176,11 @@ void ksw_exts2_sse(void *km, int qlen, const uint8_t *query, int tlen, const uin
 			for (t = 2; t < tlen; ++t) {
 				int can_type = 0;
 				if ((flag & KSW_EZ_SPLICE_FOR) && target[t-1] == 3 && target[t] == 2) can_type = 1; // ...rTG
+				
+				//. modified to include GC/GA donnor site as "canonical sites"            by YIBI CHEN
+				if ((flag & KSW_EZ_SPLICE_FOR) && target[t-1] == 1 && target[t] == 2) can_type = 1; // ...rCG
+				if ((flag & KSW_EZ_SPLICE_FOR) && target[t-1] == 0 && target[t] == 2) can_type = 1; // ...rAG
+				
 				if ((flag & KSW_EZ_SPLICE_REV) && target[t-1] == 3 && target[t] == 1) can_type = 1; // ...rTC
 				if (can_type && (target[t-2] == 0 || target[t-2] == 2)) can_type = 2;
 				if (can_type) ((int8_t*)acceptor)[t] = can_type == 2? 0 : semi_cost;
