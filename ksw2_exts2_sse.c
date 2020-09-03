@@ -127,7 +127,7 @@ void ksw_exts2_sse(void *km, int qlen, const uint8_t *query, int tlen, const uin
 				if ((flag & KSW_EZ_SPLICE_FOR) && target[t+1] == 2 && target[t+2] == 3) can_type = 1; // GTr...
 				
 				
-				//. modified to include GC/GA donnor site as "canonical sites"            by YIBI CHEN
+				//. modified to include GC/GA donor site as "canonical sites"            by YIBI CHEN
 				if ((flag & KSW_EZ_SPLICE_FOR) && target[t+1] == 2 && target[t+2] == 1) can_type = 1; // GCr...
 				if ((flag & KSW_EZ_SPLICE_FOR) && target[t+1] == 2 && target[t+2] == 0) can_type = 1; // GAr...
 				
@@ -145,7 +145,7 @@ void ksw_exts2_sse(void *km, int qlen, const uint8_t *query, int tlen, const uin
 				if ((flag & KSW_EZ_SPLICE_FOR) && target[t-1] == 0 && target[t] == 2) can_type = 1; // ...yAG
 				if ((flag & KSW_EZ_SPLICE_REV) && target[t-1] == 0 && target[t] == 1) can_type = 1; // ...yAC
 				
-				//. modified to include GC/GA donnor site as "canonical sites"            by YIBI CHEN
+				//. modified to include GC/GA donor site as "canonical sites"            by YIBI CHEN
 				if ((flag & KSW_EZ_SPLICE_REV) && target[t-1] == 2 && target[t] == 1) can_type = 1; // ...yGC
 				if ((flag & KSW_EZ_SPLICE_REV) && target[t-1] == 3 && target[t] == 1) can_type = 1; // ...yTC
 				
@@ -162,7 +162,7 @@ void ksw_exts2_sse(void *km, int qlen, const uint8_t *query, int tlen, const uin
 				if ((flag & KSW_EZ_SPLICE_FOR) && target[t+1] == 2 && target[t+2] == 0) can_type = 1; // GAy...
 				if ((flag & KSW_EZ_SPLICE_REV) && target[t+1] == 1 && target[t+2] == 0) can_type = 1; // CAy...
 				
-				//. modified to include GC/GA donnor site as "canonical sites"            by YIBI CHEN
+				//. modified to include GC/GA donor site as "canonical sites"            by YIBI CHEN
 				if ((flag & KSW_EZ_SPLICE_REV) && target[t+1] == 1 && target[t+2] == 2) can_type = 1; // CGy...
 				if ((flag & KSW_EZ_SPLICE_REV) && target[t+1] == 1 && target[t+2] == 3) can_type = 1; // CTy...
 				
@@ -177,7 +177,7 @@ void ksw_exts2_sse(void *km, int qlen, const uint8_t *query, int tlen, const uin
 				int can_type = 0;
 				if ((flag & KSW_EZ_SPLICE_FOR) && target[t-1] == 3 && target[t] == 2) can_type = 1; // ...rTG
 				
-				//. modified to include GC/GA donnor site as "canonical sites"            by YIBI CHEN
+				//. modified to include GC/GA donor site as "canonical sites"            by YIBI CHEN
 				if ((flag & KSW_EZ_SPLICE_FOR) && target[t-1] == 1 && target[t] == 2) can_type = 1; // ...rCG
 				if ((flag & KSW_EZ_SPLICE_FOR) && target[t-1] == 0 && target[t] == 2) can_type = 1; // ...rAG
 				
